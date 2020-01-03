@@ -5,38 +5,35 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    #region Public Fields
+    #region Fields
 
-    /// <summary>
-    /// The background.
-    /// Fondo del escenario
-    /// </summary>
+    /// <summary> The background. Fondo del escenario </summary>
     public RawImage background;
 
+    /// <summary> The game state. Indica si el juego esta pausado </summary>
     public GameState gameState = GameState.Idle;
 
-    /// <summary>
-    /// The platform.
-    /// Escenario sobre el que se moveran los personajes.
-    /// </summary>
+    /// <summary> The platform. Escenario sobre el que se moveran los personajes. </summary>
     public RawImage platform;
 
+    /// <summary> The player. Elemento jugador </summary>
+    public GameObject player;
+
+    /// <summary> The UI idle. Interfaz visible durante la pausa </summary>
     public GameObject uiIdle;
 
-    #endregion Public Fields
+    #endregion Fields
 
-    #region Public Enums
+    #region Enums
 
+    /// <summary> Posibles estados del juego. Pausado o Jugando </summary>
     public enum GameState { Idle, Playing };
 
-    #endregion Public Enums
+    #endregion Enums
 
-    #region Private Methods
+    #region Methods
 
-    /// <summary>
-    /// Paralaxes this instance.
-    /// Ejecucion de un efecto paralax al fondo y la plataforma.
-    /// </summary>
+    /// <summary> Paralaxes this instance. Ejecucion de un efecto paralax al fondo y la plataforma. </summary>
     private void Paralax()
     {
         float finalSpeed = Speeds.PARALAX * Time.deltaTime;
@@ -44,35 +41,23 @@ public class GameController : MonoBehaviour
         platform.uvRect = new Rect(platform.uvRect.x + finalSpeed * 2f, 0f, 1f, 1f);
     }
 
-    /// <summary>
-    /// Pausars the iniciar.
-    /// Comprueba si el juego se inicia.
-    /// </summary>
-    /// <returns>true si se inicia el juego</returns>
+    /// <summary> Pausars the iniciar. Comprueba si el juego se inicia. </summary>
+    /// <returns> true si se inicia el juego </returns>
     private bool PausarIniciar()
     {
         if (Input.GetKeyDown(KeyControllers.START) || Input.GetMouseButtonDown(MouseControllers.START))
-        {
             return true;
-        }
         return false;
     }
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-    }
-
-    /// <summary>
-    /// Updates this instance.
-    /// Iniciar el juego.
-    /// </summary>
+    /// <summary> Updates this instance. Iniciar el juego. </summary>
     private void Update()
     {
         if (gameState == GameState.Idle && PausarIniciar())
         {
             gameState = GameState.Playing;
             uiIdle.SetActive(false);
+            player.SendMessage("UpdateState", "run");
         }
 
         if (gameState == GameState.Playing)
@@ -81,5 +66,5 @@ public class GameController : MonoBehaviour
         }
     }
 
-    #endregion Private Methods
+    #endregion Methods
 }
