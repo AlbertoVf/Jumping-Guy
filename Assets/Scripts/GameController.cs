@@ -33,6 +33,15 @@ public class GameController : MonoBehaviour
 
     #region Methods
 
+    /// <summary> Pausars the iniciar. Comprueba si el juego se inicia. </summary>
+    /// <returns> true si se inicia el juego </returns>
+    private bool Iniciar()
+    {
+        if (Input.GetKeyDown(KeyControllers.START) || Input.GetMouseButtonDown(MouseControllers.START))
+            return true;
+        return false;
+    }
+
     /// <summary> Paralaxes this instance. Ejecucion de un efecto paralax al fondo y la plataforma. </summary>
     private void Paralax()
     {
@@ -41,19 +50,10 @@ public class GameController : MonoBehaviour
         platform.uvRect = new Rect(platform.uvRect.x + finalSpeed * 2f, 0f, 1f, 1f);
     }
 
-    /// <summary> Pausars the iniciar. Comprueba si el juego se inicia. </summary>
-    /// <returns> true si se inicia el juego </returns>
-    private bool PausarIniciar()
-    {
-        if (Input.GetKeyDown(KeyControllers.START) || Input.GetMouseButtonDown(MouseControllers.START))
-            return true;
-        return false;
-    }
-
     /// <summary> Updates this instance. Iniciar el juego. </summary>
     private void Update()
     {
-        if (gameState == GameState.Idle && PausarIniciar())
+        if (gameState == GameState.Idle && Iniciar())
         {
             gameState = GameState.Playing;
             uiIdle.SetActive(false);
