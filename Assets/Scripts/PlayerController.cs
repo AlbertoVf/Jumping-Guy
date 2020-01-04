@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     /// <summary> The game controller </summary>
     public GameObject gameController;
 
+    /// <summary> The particle. Particulas de polvo cuando corre </summary>
+    public ParticleSystem particle;
+
     /// <summary> The player animator </summary>
     private Animator playerAnimator;
 
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary> Games the ready. Establece que el nivel esta listo para reiniciar </summary>
     private void GameReady()
     {
         gameController.GetComponent<GameController>().gameState = GameController.GameState.Ready;
@@ -41,10 +45,23 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            ParticulasStop();
             UpdateState("dead");
             gameController.GetComponent<GameController>().gameState = GameController.GameState.Ended;
             enemyGenerator.SendMessage("CancellGenerator");
         }
+    }
+
+    /// <summary> Iniciars the particulas. </summary>
+    private void ParticulasIniciar()
+    {
+        particle.Play();
+    }
+
+    /// <summary> Stops the particulas. </summary>
+    private void ParticulasStop()
+    {
+        particle.Stop();
     }
 
     /// <summary> Starts this instance. </summary>

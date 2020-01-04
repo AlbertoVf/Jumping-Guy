@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
             gameState = GameState.Playing;
             uiIdle.SetActive(false);
             player.SendMessage("UpdateState", "run");
+            player.SendMessage("ParticulasIniciar");
             enemyGenerator.SendMessage("StartGenerator");
         }
         else if (gameState == GameState.Playing)
