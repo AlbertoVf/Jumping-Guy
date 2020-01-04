@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary> Clase para controlar todos los elementos en escena </summary>
 public class GameController : MonoBehaviour
@@ -30,12 +31,20 @@ public class GameController : MonoBehaviour
 
     #region Enums
 
-    /// <summary> Posibles estados del juego. Pausado o Jugando </summary>
-    public enum GameState { Idle, Playing };
+    /// <summary>
+    ///  Posibles estados del juego. Pausado o Jugando, muerto, preparado para el reinicio
+    /// </summary>
+    public enum GameState { Idle, Playing, Ended, Ready };
 
     #endregion Enums
 
     #region Methods
+
+    /// <summary> Restarts the game. </summary>
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     /// <summary> Pausars the iniciar. Comprueba si el juego se inicia. </summary>
     /// <returns> true si se inicia el juego </returns>
@@ -64,10 +73,16 @@ public class GameController : MonoBehaviour
             player.SendMessage("UpdateState", "run");
             enemyGenerator.SendMessage("StartGenerator");
         }
-
-        if (gameState == GameState.Playing)
+        else if (gameState == GameState.Playing)
         {
             Paralax();
+        }
+        else if (gameState == GameState.Ready)
+        {
+            if (Iniciar())
+            {
+                RestartGame();
+            }
         }
     }
 

@@ -316,8 +316,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5885201287755177016, guid: 5567e43190612924a9cd69f27cb6ed0a, type: 3}
+    - target: {fileID: 2085610621, guid: 5567e43190612924a9cd69f27cb6ed0a, type: 3}
+      propertyPath: enemyGenerator
+      value: 
+      objectReference: {fileID: 292654761}
+    - target: {fileID: 2085610621, guid: 5567e43190612924a9cd69f27cb6ed0a, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 790746992}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5567e43190612924a9cd69f27cb6ed0a, type: 3}
 --- !u!1 &790746992
 GameObject:
@@ -883,18 +890,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 681058290}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2085610621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085610620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2276cfaa1ab99b44a52a87dfc8dbd3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2119080629
 GameObject:
   m_ObjectHideFlags: 0
