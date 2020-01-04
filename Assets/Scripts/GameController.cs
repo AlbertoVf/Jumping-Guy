@@ -3,12 +3,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> Clase para controlar todos los elementos en escena </summary>
 public class GameController : MonoBehaviour
 {
     #region Fields
 
     /// <summary> The background. Fondo del escenario </summary>
     public RawImage background;
+
+    /// <summary> The enemy generator. Accede al generador de enemigos </summary>
+    public GameObject enemyGenerator;
 
     /// <summary> The game state. Indica si el juego esta pausado </summary>
     public GameState gameState = GameState.Idle;
@@ -58,6 +62,7 @@ public class GameController : MonoBehaviour
             gameState = GameState.Playing;
             uiIdle.SetActive(false);
             player.SendMessage("UpdateState", "run");
+            enemyGenerator.SendMessage("StartGenerator");
         }
 
         if (gameState == GameState.Playing)

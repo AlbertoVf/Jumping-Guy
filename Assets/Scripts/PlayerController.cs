@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts;
 using UnityEngine;
 
+/// <summary> Clase para controlar el personaje </summary>
 public class PlayerController : MonoBehaviour
 {
     #region Fields
@@ -22,12 +23,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
+    /// <summary> Starts this instance. </summary>
     private void Start()
     {
         animator = GetComponent<Animator>();
     }
 
+    /// <summary> Updates this instance. Comprueba si se pulsa la tecla de salto </summary>
     private void Update()
     {
         if (Input.GetKeyDown(KeyControllers.JUMP))

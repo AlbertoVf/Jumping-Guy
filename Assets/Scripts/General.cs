@@ -36,10 +36,27 @@ namespace Assets.Scripts
         #region Fields
 
         /// <summary> The enemy. Velocidad del enemigo. </summary>
-        public const float ENEMY = 2.0f;
+        public const float ENEMY = 3.25f;
 
         /// <summary> The paralax. Velocidad delfondo </summary>
         public const float PARALAX = 0.04f;
+
+        #endregion Fields
+    }
+
+    /// <summary> Clase para gestionar los tiempos de aparicion del enemigo </summary>
+    public class Times
+    {
+        #region Fields
+
+        /// <summary> The enemygeneratorfast. EL enemigo aparece cada 0.75s. </summary>
+        public const float ENEMYGENERATORFAST = 0.75f;
+
+        /// <summary> The enemygeneratornormal. El enmigo aparece cada 2s. </summary>
+        public const float ENEMYGENERATORNORMAL = 2f;
+
+        /// <summary> The enemygeneratorslow. El enmigo aparece cada 5s. </summary>
+        public const float ENEMYGENERATORSLOW = 5f;
 
         #endregion Fields
     }
