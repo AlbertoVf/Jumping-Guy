@@ -36,10 +36,10 @@ namespace Assets.Scripts
         #region Fields
 
         /// <summary> The enemy. Velocidad del enemigo. </summary>
-        public const float ENEMY = 0.2f;
+        public const float ENEMY = 2.0f;
 
         /// <summary> The paralax. Velocidad delfondo </summary>
-        public const float PARALAX = 0.05f;
+        public const float PARALAX = 0.04f;
 
         #endregion Fields
     }
