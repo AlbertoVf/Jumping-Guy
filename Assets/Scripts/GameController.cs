@@ -1,4 +1,5 @@
-﻿using Assets.Scripts;
+﻿using System;
+using Assets.Scripts;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -73,10 +74,17 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void ResetTimeScale(float timeScale = 1f)
+    {
+        CancelInvoke("IncrementTimeScale");
+        Time.timeScale = timeScale;
+    }
+
     /// <summary> Restarts the game. </summary>
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
+        ResetTimeScale();
     }
 
     /// <summary> Sets the record. Actualiza el record actual </summary>
@@ -84,6 +92,18 @@ public class GameController : MonoBehaviour
     public void SetRecord(int points)
     {
         PlayerPrefs.SetInt("record", points);
+    }
+
+    /// <summary> Aumenta the dificultad. </summary>
+    private void AumentarDificultad()
+    {
+        InvokeRepeating("IncrementTimeScale", Times.SCALETIME, Times.SCALETIME);
+    }
+
+    /// <summary> Games the time scale. Aumenta la velocidad del juego </summary>
+    private void IncrementTimeScale()
+    {
+        Time.timeScale += Times.SCALEINCREMENT;
     }
 
     /// <summary> Pausars the iniciar. Comprueba si el juego se inicia. </summary>
@@ -134,6 +154,7 @@ public class GameController : MonoBehaviour
         if (gameState == GameState.Idle && Iniciar())
         {
             StartPlayer();
+            AumentarDificultad();
         }
         else if (gameState == GameState.Playing)
         {

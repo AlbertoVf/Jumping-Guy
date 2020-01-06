@@ -45,12 +45,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary> Deads this instance. Acciones cuando se colisiona con un enemigo. </summary>
     private void Dead()
     {
-        ParticulasStop();
-        UpdateState("dead");
         gameController.GetComponent<GameController>().gameState = GameController.GameState.Ended;
         enemyGenerator.SendMessage("CancellGenerator");
+        gameController.SendMessage("ResetTimeScale", Times.SCALEINCREMENT * 2);
+        ParticulasStop();
+        UpdateState("dead");
 
         gameController.GetComponent<AudioSource>().Stop();
         playerAudio.Play();

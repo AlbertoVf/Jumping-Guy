@@ -66,14 +66,14 @@ namespace Assets.Scripts
     {
         #region Fields
 
-        /// <summary> The enemygeneratorfast. EL enemigo aparece cada 0.75s. </summary>
-        public const float ENEMYGENERATORFAST = 0.75f;
-
         /// <summary> The enemygeneratornormal. El enmigo aparece cada 2s. </summary>
         public const float ENEMYGENERATORNORMAL = 2f;
 
-        /// <summary> The enemygeneratorslow. El enmigo aparece cada 5s. </summary>
-        public const float ENEMYGENERATORSLOW = 5f;
+        /// <summary> The scale increment. Velocidad de incremento. </summary>
+        public const float SCALEINCREMENT = 0.25f;
+
+        /// <summary> The scaletime. Cada cuanos segundos se incrementa la velocidad </summary>
+        public const float SCALETIME = 6f;
 
         #endregion Fields
     }
