@@ -1,8 +1,8 @@
 ﻿using Assets.Scripts;
 
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary> Clase para controlar todos los elementos en escena </summary>
 public class GameController : MonoBehaviour
@@ -24,8 +24,23 @@ public class GameController : MonoBehaviour
     /// <summary> The player. Elemento jugador </summary>
     public GameObject player;
 
+    /// <summary> The point text. Texto con la puntuacion actual </summary>
+    public Text pointText;
+
+    /// <summary> The record text. Texto con el record de puntos </summary>
+    public Text recordText;
+
     /// <summary> The UI idle. Interfaz visible durante la pausa </summary>
     public GameObject uiIdle;
+
+    /// <summary> The UI score. Interfaz con la puntuacion </summary>
+    public GameObject uiScore;
+
+    /// <summary> The background audio </summary>
+    private AudioSource backgroundAudio;
+
+    /// <summary> The points. Puntos actuales </summary>
+    private int points = 0;
 
     #endregion Fields
 
@@ -40,10 +55,35 @@ public class GameController : MonoBehaviour
 
     #region Methods
 
+    /// <summary> Gets the record. </summary>
+    /// <returns> record actual </returns>
+    public int GetRecord()
+    {
+        return PlayerPrefs.GetInt("record", 0);
+    }
+
+    public void IncreasePoints()
+    {
+        points++;
+        pointText.text = "Points: " + points.ToString();
+        if (points > GetRecord())
+        {
+            SetRecordText();
+            SetRecord(points);
+        }
+    }
+
     /// <summary> Restarts the game. </summary>
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    /// <summary> Sets the record. Actualiza el record actual </summary>
+    /// <param name="points"> The points. </param>
+    public void SetRecord(int points)
+    {
+        PlayerPrefs.SetInt("record", points);
     }
 
     /// <summary> Pausars the iniciar. Comprueba si el juego se inicia. </summary>
@@ -63,16 +103,37 @@ public class GameController : MonoBehaviour
         platform.uvRect = new Rect(platform.uvRect.x + finalSpeed * 2f, 0f, 1f, 1f);
     }
 
+    /// <summary> Sets the record text. </summary>
+    private void SetRecordText()
+    {
+        recordText.text = "Record: " + GetRecord().ToString();
+    }
+
+    /// <summary> Starts this instance. </summary>
+    private void Start()
+    {
+        backgroundAudio = GetComponent<AudioSource>();
+        SetRecordText();
+    }
+
+    /// <summary> Starts the player. Da inicio a la partida </summary>
+    private void StartPlayer()
+    {
+        gameState = GameState.Playing;
+        backgroundAudio.Play();
+        uiIdle.SetActive(false);
+        uiScore.SetActive(true);
+        player.SendMessage("UpdateState", "run");
+        player.SendMessage("ParticulasIniciar");
+        enemyGenerator.SendMessage("StartGenerator");
+    }
+
     /// <summary> Updates this instance. Iniciar el juego. </summary>
     private void Update()
     {
         if (gameState == GameState.Idle && Iniciar())
         {
-            gameState = GameState.Playing;
-            uiIdle.SetActive(false);
-            player.SendMessage("UpdateState", "run");
-            player.SendMessage("ParticulasIniciar");
-            enemyGenerator.SendMessage("StartGenerator");
+            StartPlayer();
         }
         else if (gameState == GameState.Playing)
         {

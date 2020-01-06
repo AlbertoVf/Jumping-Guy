@@ -2,6 +2,23 @@
 
 namespace Assets.Scripts
 {
+    /// <summary> Clase para gestionar el audio </summary>
+    public class Audio
+    {
+        #region Methods
+
+        /// <summary> Establecers the audio. </summary>
+        /// <param name="audioSource"> The audio source. </param>
+        /// <param name="clip">        The clip. </param>
+        public static void EstablecerAudio(AudioSource audioSource, AudioClip clip)
+        {
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
+
+        #endregion Methods
+    }
+
     /// <summary> Clase para gestionar las teclas. </summary>
     public class KeyControllers
     {
