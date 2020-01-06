@@ -4875,6 +4875,7 @@ MonoBehaviour:
   gameController: {fileID: 0}
   jumpClip: {fileID: 8300000, guid: d12959413d332b94a87dbcc55a0bfc8e, type: 3}
   particle: {fileID: 93221190}
+  pointClip: {fileID: 8300000, guid: 6a3ace39a2294dc4280e264895906645, type: 3}
 --- !u!61 &2085610622
 BoxCollider2D:
   m_ObjectHideFlags: 0

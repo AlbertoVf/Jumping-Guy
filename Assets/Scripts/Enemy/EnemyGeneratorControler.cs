@@ -11,7 +11,7 @@ public class EnemyGeneratorControler : MonoBehaviour
     public GameObject enemyPrefab;
 
     /// <summary> Tiempo en el que se genera cada enemigo </summary>
-    public float generatorTimer = Times.ENEMYGENERATORNORMAL;
+    private float generatorTimer = Times.ENEMYGENERATORNORMAL;
 
     #endregion Fields
 

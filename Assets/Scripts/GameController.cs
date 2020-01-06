@@ -1,5 +1,4 @@
-﻿using System;
-using Assets.Scripts;
+﻿using Assets.Scripts;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -63,6 +62,7 @@ public class GameController : MonoBehaviour
         return PlayerPrefs.GetInt("record", 0);
     }
 
+    /// <summary> Increases the points. Actualiza la puntuacion </summary>
     public void IncreasePoints()
     {
         points++;
@@ -74,6 +74,8 @@ public class GameController : MonoBehaviour
         }
     }
 
+    /// <summary> Resets the time scale. </summary>
+    /// <param name="timeScale"> The time scale. </param>
     public void ResetTimeScale(float timeScale = 1f)
     {
         CancelInvoke("IncrementTimeScale");
